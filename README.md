@@ -10,8 +10,8 @@
 
 **[Releases](https://github.com/millo0o/product-retouch/releases/latest)** 에서 자기 컴퓨터 것 **하나만** 받으세요.
 
-- 윈도우: `제품보정-윈도우-<버전>.zip`
-- 맥: `제품보정-맥-<버전>.zip`
+- 윈도우: `jepumbojeong-windows-<버전>.zip` (윈도우용)
+- 맥: `jepumbojeong-mac-<버전>.zip` (맥용)
 
 풀면 맨 위에 `설치하기` · `시작하기` · `사용법.txt` 가 있어요. `사용법.txt` 대로 하면 돼요.
 (아래 내용은 이 저장소를 직접 고치는 사람용이에요. 묶음은 `python3 배포/묶음만들기.py <버전>` 으로 만들어요.)

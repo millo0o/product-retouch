@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """윈도우용·맥용 내려받기 묶음(zip)을 따로 만든다.
    받는 사람은 자기 컴퓨터 것 하나만 받아 풀고, 맨 위의 설치하기 → 시작하기만 누르면 된다.
-   사용법: python3 배포/묶음만들기.py [버전=날짜]  →  배포/dist/제품보정-윈도우-<버전>.zip, 제품보정-맥-<버전>.zip
+   사용법: python3 배포/묶음만들기.py [버전=날짜]  →  배포/dist/jepumbojeong-windows-<버전>.zip, jepumbojeong-mac-<버전>.zip (풀면 제품보정-윈도우/ 제품보정-맥/ 폴더)
    (프로그램 본체는 저장소 하나로 고치고, 묶을 때만 컴퓨터별로 나눔)"""
 import os, sys, zipfile, datetime, stat
 
@@ -27,7 +27,8 @@ def put(z, arc, data, exe=False):
 
 for name, p in PLAT.items():
     top = f"제품보정-{name}"
-    out = os.path.join(DIST, f"{top}-{VER}.zip")
+    # 파일 이름은 영어로 (깃허브 내려받기 페이지가 한글 파일 이름을 못 올림). 풀면 나오는 폴더 이름은 한글
+    out = os.path.join(DIST, f"jepumbojeong-{ {'윈도우': 'windows', '맥': 'mac'}[name] }-{VER}.zip")
     with zipfile.ZipFile(out, "w") as z:
         for rel in COMMON + p["files"]:
             put(z, f"{top}/{rel}", open(os.path.join(ROOT, rel), "rb").read())
