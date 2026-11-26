@@ -6,15 +6,17 @@
 - **빠른 보정** (약 4분): AI 보정 1번 + 글씨 검사. 틀린 글씨는 화면에 표시만 해요.
 - **꼼꼼 보정** (약 10분): 라벨 글씨를 다시 그리고 틀린 낱말까지 고쳐요. 빠른 보정이 끝난 사진은 "꼼꼼 보정하기" 버튼으로 이어서 할 수 있어요.
 
-## 내려받기 (쓰는 분)
+## 내려받기 (쓰는 분은 여기만 보세요)
 
-**[Releases](https://github.com/millo0o/product-retouch/releases/latest)** 에서 자기 컴퓨터 것 **하나만** 받으세요.
+이 페이지 위의 폴더·파일들은 프로그램을 고치는 사람용이에요. **그건 받지 마시고**, 아래에서 자기 컴퓨터 것 하나만 누르세요.
 
-- 윈도우: `jepumbojeong-windows-<버전>.zip` (윈도우용)
-- 맥: `jepumbojeong-mac-<버전>.zip` (맥용)
+### 👉 [윈도우용 받기](https://github.com/millo0o/product-retouch/releases/download/v1.0/jepumbojeong-windows-1.0.zip)
 
-풀면 맨 위에 `설치하기` · `시작하기` · `사용법.txt` 가 있어요. `사용법.txt` 대로 하면 돼요.
-(아래 내용은 이 저장소를 직접 고치는 사람용이에요. 묶음은 `python3 배포/묶음만들기.py <버전>` 으로 만들어요.)
+### 👉 [맥용 받기](https://github.com/millo0o/product-retouch/releases/download/v1.0/jepumbojeong-mac-1.0.zip)
+
+받은 zip을 풀면 `제품보정-윈도우` (또는 `제품보정-맥`) 폴더가 나와요. 그 안의 **`사용법.txt`** 대로 **설치하기 → 시작하기** 를 누르면 돼요.
+
+> 묶음 만들기(고치는 사람용): `python3 배포/묶음만들기.py <버전>` → `gh release create v<버전> 배포/dist/*.zip`
 
 ## 준비물
 
