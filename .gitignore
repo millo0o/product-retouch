@@ -6,3 +6,4 @@ __pycache__/
 SKILL.md
 scripts/open.sh
 .DS_Store
+배포/dist/
