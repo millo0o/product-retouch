@@ -7,6 +7,8 @@ if not exist ".venv\Scripts\python.exe" (
   pause
   exit /b
 )
+echo 새 버전 확인 중...
+".venv\Scripts\python.exe" -X utf8 scripts\updater.py
 echo 대시보드를 여는 중... 브라우저가 열리면 사진을 끌어다 놓으세요.
 echo 이 창을 닫으면 보정이 멈춥니다. 쓰는 동안은 열어 두세요.
 ".venv\Scripts\python.exe" -X utf8 scripts\server.py --open
