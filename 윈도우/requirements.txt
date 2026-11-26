@@ -1,0 +1,7 @@
+# 파이썬 엔진(윈도우, 그리고 swift 도구를 못 만드는 맥)에 필요한 것
+rapidocr>=3.4
+onnxruntime>=1.17
+opencv-python>=4.8
+rembg>=2.0.50
+pillow>=10.0
+numpy>=1.24

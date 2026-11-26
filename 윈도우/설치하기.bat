@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 >nul
 setlocal
-cd /d "%~dp0.."
+cd /d "%~dp0"
 title 제품 보정 설치
 echo ==================================================
 echo   제품 사진 보정 - 설치 (처음 한 번만)
@@ -16,7 +16,7 @@ if not defined PY (
   echo   파이썬이 없어 설치합니다. 설치 창이 뜨면 허용해 주세요.
   winget install -e --id Python.Python.3.12 --accept-package-agreements --accept-source-agreements
   echo.
-  echo   파이썬 설치가 끝났습니다. 이 창을 닫고 "윈도우" 폴더의 "설치하기.bat" 을 한 번 더 실행해 주세요.
+  echo   파이썬 설치가 끝났습니다. 이 창을 닫고 "설치하기.bat" 을 한 번 더 실행해 주세요.
   pause
   exit /b
 )
@@ -29,7 +29,7 @@ if errorlevel 1 (
     echo   Node.js 가 없어 설치합니다. 설치 창이 뜨면 허용해 주세요.
     winget install -e --id OpenJS.NodeJS.LTS --accept-package-agreements --accept-source-agreements
     echo.
-    echo   Node.js 설치가 끝났습니다. 이 창을 닫고 "윈도우" 폴더의 "설치하기.bat" 을 한 번 더 실행해 주세요.
+    echo   Node.js 설치가 끝났습니다. 이 창을 닫고 "설치하기.bat" 을 한 번 더 실행해 주세요.
     pause
     exit /b
   )
@@ -55,5 +55,5 @@ call codex login status >nul 2>nul
 if errorlevel 1 call codex login
 
 echo.
-echo 설치 끝! 이제 "윈도우" 폴더의 "시작하기.bat" 을 두 번 눌러 쓰시면 됩니다.
+echo 설치 끝! 이제 "시작하기.bat" 을 두 번 눌러 쓰시면 됩니다.
 pause

@@ -3,7 +3,4 @@ config.json
 bin/
 __pycache__/
 *.pyc
-SKILL.md
-scripts/open.sh
 .DS_Store
-배포/dist/

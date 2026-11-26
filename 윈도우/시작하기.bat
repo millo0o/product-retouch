@@ -1,9 +1,9 @@
 @echo off
 chcp 65001 >nul
-cd /d "%~dp0.."
+cd /d "%~dp0"
 title 제품 보정 대시보드 (이 창을 닫으면 꺼집니다)
 if not exist ".venv\Scripts\python.exe" (
-  echo 먼저 "윈도우" 폴더의 "설치하기.bat" 을 실행해 주세요.
+  echo 먼저 "설치하기.bat" 을 실행해 주세요.
   pause
   exit /b
 )
