@@ -9,7 +9,7 @@ import io, os, platform, shutil, socket, subprocess, sys, urllib.request, zipfil
 REPO = "millo0o/product-retouch"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PLAT = "윈도우" if platform.system() == "Windows" else "맥"
-KEEP = {"config.json", ".venv", "bin", "__pycache__", ".DS_Store"}
+KEEP = {"config.json", ".venv", "bin", "__pycache__", ".DS_Store", "새소식.json"}
 NO_TOUCH = {"설치하기.bat", "시작하기.bat", "설치하기.command", "시작하기.command"}
 
 def get(url, t=15):
@@ -86,7 +86,24 @@ def main():
                 name = rel.split("/")[-1][:-6]
                 print(f"  맥 도구 다시 만드는 중: {name}", flush=True)
                 subprocess.run(["swiftc", "-O", "-o", os.path.join(ROOT, "bin", name), os.path.join(ROOT, rel)])
+    # 바뀐 점: 바뀐점.txt 에서 내 옛 버전보다 새로운 항목만 골라 새소식.json 으로 → 대시보드 맨 위에 보여 줌
+    notes = []
+    try:
+        cur = None
+        for line in new.get("바뀐점.txt", b"").decode("utf-8").splitlines():
+            m = line.strip()
+            if m.startswith("## "):
+                cur = m[3:].strip()
+                if cur == mine: break
+                notes.append({"ver": cur, "items": []})
+            elif m.startswith("- ") and notes: notes[-1]["items"].append(m[2:])
+        import json
+        with open(os.path.join(ROOT, "새소식.json"), "w", encoding="utf-8") as f:
+            json.dump({"from": mine, "to": latest, "notes": notes}, f, ensure_ascii=False)
+    except Exception: pass
     print(f"  업데이트 끝 → {latest}")
+    for n in notes:
+        for it in n["items"]: print(f"   · {it}")
     if changed_launcher:
         print("  * 설치하기·시작하기 파일도 새로 바뀌었어요. 필요하면 깃허브에서 새로 받아 주세요:", ", ".join(changed_launcher))
 

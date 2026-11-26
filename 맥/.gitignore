@@ -1,4 +1,5 @@
 config.json
+새소식.json
 .venv/
 bin/
 __pycache__/

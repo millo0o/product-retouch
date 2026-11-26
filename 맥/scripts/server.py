@@ -102,6 +102,9 @@ class H(http.server.BaseHTTPRequestHandler):
         if path in ("/", "/index.html"):
             try: return self.send(200, open(INDEX, "rb").read(), "text/html; charset=utf-8")
             except FileNotFoundError: return self.send(200, "<h1>화면 준비 중</h1>", "text/html; charset=utf-8")
+        if path == "/api/news":   # 자동 업데이트 뒤 바뀐 점 (updater.py 가 새소식.json 을 남김)
+            try: return self.send(200, json.load(open(os.path.join(SKILL, "새소식.json"), encoding="utf-8")))
+            except Exception: return self.send(200, {})
         if path == "/api/jobs":
             with lock:
                 out = []
@@ -171,6 +174,10 @@ class H(http.server.BaseHTTPRequestHandler):
                 if m == "fast": j["quality"] = "fast"
                 j["status"] = "대기"; j.pop("report", None); j.pop("message", None); save()
             q.put(j["id"]); return self.send(200, j)
+        if path == "/api/news/seen":
+            try: os.remove(os.path.join(SKILL, "새소식.json"))
+            except OSError: pass
+            return self.send(200, {"ok": True})
         if path == "/api/remove":
             with lock:
                 j = find(qs.get("id", ""))

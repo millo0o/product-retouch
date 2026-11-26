@@ -25,6 +25,13 @@ button,input{font:inherit;color:inherit}
 .hdr{height:64px;display:flex;align-items:center;justify-content:space-between}
 .hdr h1{margin:0;font-size:28px;font-weight:600;letter-spacing:-0.02em}
 .hdr .note{font-size:14px;color:var(--sub)}
+.news{background:var(--wash);border:1px solid #D6E0F0;border-radius:14px;padding:14px 18px;margin-top:8px;display:flex;gap:16px;align-items:flex-start}
+.news .nb{flex:1;min-width:0}
+.news b{font-size:15px}
+.news ul{margin:6px 0 0;padding-left:18px;font-size:14px;color:var(--ink)}
+.news li{margin:2px 0}
+.news .nv{font-size:13px;color:var(--sub);margin-top:6px}
+.news button{min-height:36px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:14px;white-space:nowrap}
 
 .card{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:24px}
 
@@ -165,6 +172,7 @@ button,input{font:inherit;color:inherit}
     <h1>제품 사진 보정·누끼</h1>
     <span class="note" id="live">연결 중…</span>
   </header>
+  <div class="news" id="news" hidden></div>
 
   <label class="drop empty" id="drop">
     <span class="t">사진을 끌어다 놓으세요</span>
@@ -379,6 +387,13 @@ async function refresh() {
   } catch (e) { $('#live').textContent = '서버 연결 끊김'; }
 }
 refresh(); setInterval(refresh, 1000);
+fetch('/api/news').then(r => r.json()).then(n => {
+  if (!n || !n.to) return;
+  const box = $('#news'), items = (n.notes || []).flatMap(x => x.items);
+  box.innerHTML = `<div class="nb"><b>새 버전으로 바뀌었어요 (${esc(n.from || '?')} → ${esc(n.to)})</b>${items.length ? `<ul>${items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>` : ''}</div><button type="button" id="newsok">확인</button>`;
+  box.hidden = false;
+  $('#newsok').onclick = () => { box.hidden = true; fetch('/api/news/seen', {method: 'POST'}); };
+}).catch(() => {});
 </script>
 </body>
 </html>
