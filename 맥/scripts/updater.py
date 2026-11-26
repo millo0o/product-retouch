@@ -34,7 +34,14 @@ def main():
     mine = local_ver()
     try:
         from urllib.parse import quote
-        latest = get(f"https://raw.githubusercontent.com/{REPO}/main/{quote(PLAT)}/{quote('버전.txt')}", 8).decode("utf-8").strip()
+        path = f"{quote(PLAT)}/{quote('버전.txt')}"
+        try:   # 깃허브 API (방금 올린 것도 바로 보임). 안 되면 raw 주소 (몇 분 늦게 보일 수 있음)
+            req = urllib.request.Request(f"https://api.github.com/repos/{REPO}/contents/{path}?ref=main",
+                                         headers={"User-Agent": "product-retouch-updater", "Accept": "application/vnd.github.raw"})
+            with urllib.request.urlopen(req, timeout=8) as r: latest = r.read().decode("utf-8").strip()
+        except Exception:
+            import time
+            latest = get(f"https://raw.githubusercontent.com/{REPO}/main/{path}?t={int(time.time())}", 8).decode("utf-8").strip()
     except Exception:
         print("  (업데이트 확인 못 함: 인터넷 연결을 확인하세요. 지금 버전으로 켭니다)"); return
     if not latest or latest == mine:
