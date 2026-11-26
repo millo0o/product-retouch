@@ -1,6 +1,6 @@
 #!/bin/zsh
 # 맥 설치 (처음 한 번만). Finder에서 두 번 누르면 터미널이 열리며 실행됩니다.
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 echo "=================================================="
 echo "  제품 사진 보정 - 맥 설치 (처음 한 번만)"
 echo "=================================================="
@@ -12,7 +12,7 @@ echo "[1/3] 글씨 인식·누끼 도구 만들기 (맥 내장 기능 사용)"
 mkdir -p bin
 ok=1
 for t in ocr labelfit stack retouch; do
-  swiftc -O -o "bin/$t" "scripts/$t.swift" 2>/dev/null || ok=0
+  swiftc -O -o "bin/$t" "scripts/mac/$t.swift" 2>/dev/null || ok=0
 done
 if [[ $ok == 0 ]]; then
   echo "  맥 도구를 만들지 못해 파이썬 도구로 설치합니다 (몇 분 걸림)"
@@ -32,5 +32,5 @@ if [[ -z "$CODEX" ]]; then
 fi
 echo "[3/3] ChatGPT 계정 로그인 (브라우저가 열리면 본인 계정으로)"
 "$CODEX" login status >/dev/null 2>&1 || "$CODEX" login
-echo ""; echo "설치 끝! 이제 '시작하기.command' 를 두 번 눌러 쓰시면 됩니다."
+echo ""; echo "설치 끝! 이제 '맥' 폴더의 '시작하기.command' 를 두 번 눌러 쓰시면 됩니다."
 read -k1 "?아무 키나 누르면 닫힙니다"
